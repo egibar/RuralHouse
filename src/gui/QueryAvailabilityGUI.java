@@ -133,7 +133,7 @@ private static final long serialVersionUID = 1L;
     	public void mouseClicked(MouseEvent e) {
         try{
     		int i=table.getSelectedRow();
-    		int houseNumber = (Integer) tableModel.getValueAt(i,1);
+    		int houseNumber = (int) tableModel.getValueAt(i,1);
     		
 			// Dates are represented as strings in the table model
 			// They have to be converted to Dates "dd/mm/aa", removing hh:mm:ss:ms with trim					

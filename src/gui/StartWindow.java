@@ -123,6 +123,11 @@ public class StartWindow extends JFrame {
 	private void initialize() {
 		// this.setSize(271, 295);
 		this.setSize(364, 371);
+		String lcOSName = System.getProperty("os.name").toLowerCase();
+		boolean IS_MAC = lcOSName.startsWith("mac os x");
+		if (IS_MAC)
+			System.setProperty("apple.laf.useScreenMenuBar", "true");
+
 		setJMenuBar(getMenuBar_1());
 		this.setContentPane(getJContentPane());
 		this.setTitle("Rural Houses");
@@ -146,7 +151,7 @@ public class StartWindow extends JFrame {
 					mntmAvailability.doClick();
 				}
 			});
-			btnNewButton.setBounds(97, 178, 167, 25);
+			btnNewButton.setBounds(97, 78, 167, 25);
 			jContentPane.add(btnNewButton);
 
 			JButton btnNewButton_1 = new JButton("Parametrized Search");
@@ -258,8 +263,7 @@ public class StartWindow extends JFrame {
 		}
 		return jContentPane;
 	}
-	
-	@SuppressWarnings("deprecation")
+
 	public static void main(String[] args) {
 
 		StartWindow a = new StartWindow();
@@ -286,21 +290,26 @@ public class StartWindow extends JFrame {
 				// RMI server port number
 				int portNumber = Integer.parseInt(c.getPortRMI());
 				// RMI server host IP IP
-				facadeInterface = (ApplicationFacadeInterface) Naming.lookup("rmi://" + businessLogicNode + ":" + portNumber + serviceName);
+				facadeInterface = (ApplicationFacadeInterface) Naming
+						.lookup("rmi://" + businessLogicNode + ":" + portNumber
+								+ serviceName);
 			}
 
-	//		setClientMode();
+			setClientMode();
 
 		} catch (java.rmi.ConnectException e) {
-			a.lblNewLabel.setText("No business logic: Run BusinessLogicServer first!!");
+			a.lblNewLabel
+					.setText("No business logic: Run BusinessLogicServer first!!");
 			a.lblNewLabel.setForeground(Color.RED);
 			System.out.println("Error in StartWindow: " + e.toString());
 		} catch (java.rmi.NotBoundException e) {
-			a.lblNewLabel.setText("No business logic: Maybe problems running BusinessLogicServer");
+			a.lblNewLabel
+					.setText("No business logic: Maybe problems running BusinessLogicServer");
 			a.lblNewLabel.setForeground(Color.RED);
 			System.out.println("Error in StartWindow: " + e.toString());
 		} catch (com.db4o.ext.DatabaseFileLockedException e) {
-			a.lblNewLabel.setText("Database locked: Do not run BusinessLogicServer or BusinessLogicServer!!");
+			a.lblNewLabel
+					.setText("Database locked: Do not run BusinessLogicServer or BusinessLogicServer!!");
 			a.lblNewLabel.setForeground(Color.RED);
 			System.out.println("Error in StartWindow: " + e.toString());
 		} catch (DB4oManagerCreationException e) {
@@ -453,23 +462,13 @@ public class StartWindow extends JFrame {
 			mntmLogIn = new JMenuItem("Log in");
 		}
 
-		mntmLogIn.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				JFrame a = new LoginGUI();
-				a.setVisible(true);
-
-			}
-		});
 		return mntmLogIn;
-	
 	}
 
 	private JMenuItem getMntmSignIn() {
-		if (mntmSignIn == null) 
+		if (mntmSignIn == null) {
 			mntmSignIn = new JMenuItem("Sign in");
-		
+		}
 		mntmSignIn.addActionListener(new ActionListener() {
 
 			@Override
@@ -485,7 +484,6 @@ public class StartWindow extends JFrame {
 	private JMenu getMnQuerys() {
 		if (mnQuerys == null) {
 			mnQuerys = new JMenu("Querys");
-			
 			mnQuerys.add(getMntmAvailability());
 			mnQuerys.add(getMntmParametricedSearch());
 			mnQuerys.add(getSeparator_3());

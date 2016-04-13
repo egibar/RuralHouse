@@ -69,6 +69,7 @@ public class ParametrizedSearchGUI extends JFrame {
 
 	private void jbInit() throws Exception {
 		ApplicationFacadeInterface facade = StartWindow.getBusinessLogic();
+
 		rhs = facade.getAllRuralHouses();
 		this.getContentPane().setLayout(null);
 		this.setSize(new Dimension(678, 652));
@@ -117,7 +118,7 @@ public class ParametrizedSearchGUI extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				try {
 					int i = table.getSelectedRow();
-					int houseNumber =  (Integer) tableModel.getValueAt(i, 1);
+					int houseNumber = (int) tableModel.getValueAt(i, 1);
 
 					// Dates are represented as strings in the table model
 					// They have to be converted to Dates "dd/mm/aa", removing

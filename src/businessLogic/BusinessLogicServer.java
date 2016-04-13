@@ -22,10 +22,8 @@ import dataAccess.DB4oManager;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-@SuppressWarnings("deprecation")
 public class BusinessLogicServer extends JDialog {
-	
-	private static final long serialVersionUID = 1L;
+
 	private final JPanel contentPanel = new JPanel();
 	JTextArea textArea;
 	ApplicationFacadeInterface server;
